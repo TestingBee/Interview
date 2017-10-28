@@ -64,7 +64,7 @@ $( "#searchForm" ).submit(function( event ) {
     },
     success: function(data) { 
       if(data.Status =="FAIL"){$("#result").html("Invalid Username And Password"); }
-      else { window.location.href="http://www.blahblah.com/logout.php"; }
+      else { window.location.href = '/profile.html'; }
 
        },
     error: function() { alert('Failed'); }
@@ -74,4 +74,4 @@ $( "#searchForm" ).submit(function( event ) {
 });
 </script>
 </body>
-</html>```
+</html>

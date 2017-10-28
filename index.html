@@ -1,15 +1,17 @@
-﻿<!DOCTYPE html>
+﻿```<!DOCTYPE html>
 <html>
 <head>
-	<style>h1 {
+    <style>h1 {
     background-color: blue;
 }
-		body {
+        body {
     background-color: lightcyan;
 }
-	</style>
+    </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <title>Interview Login Page</title>
-	
+    
 </head>
 <body>
 <h1 align="center">Welcome to Interview Login Page</h1>
@@ -19,7 +21,7 @@
   Goto http://w3c.github.io/html-reference/input.text.html#input.text for more information on all attributes that can be used with text input field
 -->
 </p>
-<form method="post" action="form-handler.php">
+<form action="/" id="searchForm">
   <div>
     <h4>
       <label for="email">User Name: <span class="required">*</span></label>
@@ -34,8 +36,42 @@
   </div>
   <div>
     <input type="submit" value="Submit"  id="submit" />
-    <input type="button" value="Reset" onClick="history.back()" />
-  </div>
-</form>
+    <input type="reset" value="Reset" />
+  </div>  
+  </form>
+  <!-- the result of the search will be rendered inside this div -->
+  <div id="result"></div>
+  <script>
+// Attach a submit handler to the form
+$( "#searchForm" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $( this ),
+    username = $form.find( "input[name='email']" ).val(),
+    password = $form.find( "input[name='password']" ).val()
+    url = "http://interview-1.apphb.com/api/authenticate?username="+username+"&password="+password;
+
+   $.ajax({
+    url: url,
+    type: 'GET',
+    crossDomain: true,
+    dataType: 'json',
+     accepts: {
+      mycustomtype: 'application/json'
+    },
+    success: function(data) { 
+      if(data.Status =="FAIL"){$("#result").html("Invalid Username And Password"); }
+      else { window.location.href="http://www.blahblah.com/logout.php"; }
+
+       },
+    error: function() { alert('Failed'); }
+
+  });
+
+});
+</script>
 </body>
-</html>
+</html>```
